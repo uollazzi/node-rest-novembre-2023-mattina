@@ -18,11 +18,16 @@ router.post("/add", async (req: Request, res: Response) => {
         const r = await db.addPost(post.title, post.body, post.author, post.hidden);
         res.json(r);
     } catch (error) {
-        const err = {
-            message: (error as Error.ValidationError).message
-        }
+        if (error instanceof Error.ValidationError) {
+            const customError = {
+                message: error.message
+            }
 
-        res.status(400).json(err);
+            res.status(400).json(customError);
+        }
+        else {
+            res.status(400).json(error);
+        }
     }
 });
 
