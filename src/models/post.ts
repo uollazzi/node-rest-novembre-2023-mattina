@@ -16,3 +16,11 @@ export interface PostAddDTO {
     body: string,
     hidden: boolean
 }
+
+export interface PostUpdateDTO {
+    _id: string;
+    title: string,
+    author: string,
+    body: string,
+    hidden: boolean
+}
